@@ -1,0 +1,80 @@
+NAME
+    CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup
+    window
+
+VERSION
+    Version 0.01
+
+SYNOPSIS
+  End user information
+    This module provides a plugin framework for displaying runtime
+    information about your CGI::Application app in a popup window. A sample
+    Timing plugin is provided to show how it works:
+
+        use CGI::Application::Plugin::DevPopup;
+        use CGI::Application::Plugin::DevPopup::Timing;
+
+        The rest of your application follows
+        ...
+
+    Now whenever you access a runmode, a window pops up over your content,
+    showing information about how long the various stages have taken. Adding
+    other CAP::DevPopup plugins will get you more information. A HTML::Tidy
+    plugin showing you how your document conforms to W3C standards is in the
+    works.
+
+  Developer information
+    Creating a new plugin for DevPopup is fairly simple. CAP::DevPopup
+    registers a new callback point (named "devpopup_report"), which it uses
+    to collect output from your plugin. You can add a callback to that
+    point, and return your formatted output from there. The callback has
+    this signature:
+
+        sub callback($cgiapp_class, $outputref)
+
+    You pass your output to the devpopup object by calling
+
+        $cgiapp_class->devpopup->add_report(
+                    title   => $title,
+                    summary => $summary,
+                    report  => $body
+            );
+
+    You are receiving $outputref, because DevPopup wants to be the last one
+    to be called in the postrun callback. If you had wanted to act at
+    postrun time, then please do so with this variable, and not through a
+    callback at postrun.
+
+INSTALLATION
+
+To install this module, run:
+    cpan CGI::Application::Plugin::DevPopup
+
+To mnually install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+AUTHOR
+    Rhesa Rozendaal, "rhesa@cpan.org"
+
+BUGS
+    Please report any bugs or feature requests to
+    "bug-cgi-application-plugin-devpopup@rt.cpan.org", or through the web
+    interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-D
+    evPopup>. I will be notified, and then you'll automatically be notified
+    of progress on your bug as I make changes.
+
+ACKNOWLEDGEMENTS
+    Mark Stosberg for the initial idea, and for pushing me to write it.
+    Sam Tregar for providing me with the skeleton cgiapp_postrun.
+
+COPYRIGHT & LICENSE
+    Copyright 2005 Rhesa Rozendaal, all rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+

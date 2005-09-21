@@ -1,0 +1,5 @@
+Revision history for CGI-Application-Plugin-DevPopup
+
+0.01    2005-09-21  Rhesa Rozendaal <rhesa@cpan.org>
+    - Initial revision, basic html and a simple Timing plugin.
+
