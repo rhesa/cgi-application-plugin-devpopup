@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base 'Exporter';
 use HTML::Template;
@@ -16,7 +16,7 @@ my ( $head, $script, $template );                       # html stuff for our scr
 sub import
 {
     my $caller = scalar(caller);
-    $caller->add_callback( 'postrun', \&_devpopup_output );
+    $caller->add_callback( 'postrun', \&_devpopup_output ) if $ENV{'CAP_DEVPOPUP_EXEC'};
     $caller->new_hook('devpopup_report');
     goto &Exporter::import;
 }
@@ -70,17 +70,17 @@ sub _devpopup_output
     my $j = _escape_js($script . join($/, map { $_->{script} } grep exists $_->{script},  @$devpopup) );
 
     my $js = qq{
-	<script language="javascript">
-	var devpopup_window = window.open("", "devpopup_window", "height=400,width=600");
-	devpopup_window.document.write("$h");
-	devpopup_window.document.write("$j");
-	devpopup_window.document.write("\t<");
-	devpopup_window.document.write("/script>");
-	devpopup_window.document.write("$o");
-	devpopup_window.document.close();
-	devpopup_window.focus();
-	</script>
-	};
+    <script language="javascript">
+    var devpopup_window = window.open("", "devpopup_window", "height=400,width=600");
+    devpopup_window.document.write("$h");
+    devpopup_window.document.write("$j");
+    devpopup_window.document.write("\t<");
+    devpopup_window.document.write("/script>");
+    devpopup_window.document.write("$o");
+    devpopup_window.document.close();
+    devpopup_window.focus();
+    </script>
+    };
 
     # insert the js code before the body close,
     # if one exists
@@ -110,26 +110,26 @@ $head = <<HEAD;
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Devpopup results</title>
-	<style type="text/css">
-		div.report { border: dotted 1px black; margin: 1em;}
-		div.report h2 { color: #000; background-color: #ddd; padding:.2em; margin-top:0;}
-		div.report_full, div.report_summary { padding: 0em 1em; }
-		a:hover, div.report h2:hover { cursor: pointer; background-color: #eee; }
-		a { text-decoration: underline }
-	</style>
+    <title>Devpopup results</title>
+    <style type="text/css">
+    	div.report { border: dotted 1px black; margin: 1em;}
+    	div.report h2 { color: #000; background-color: #ddd; padding:.2em; margin-top:0;}
+    	div.report_full, div.report_summary { padding: 0em 1em; }
+    	a:hover, div.report h2:hover { cursor: pointer; background-color: #eee; }
+    	a { text-decoration: underline }
+    </style>
 HEAD
 
 $script = <<JS;
-	<script type="text/javascript">
-		function swap(id1,id2)
-		{
-			var d1 = document.getElementById(id1);
-			var d2 = document.getElementById(id2);
-			var s = d1.style.display;
-			d1.style.display = d2.style.display;
-			d2.style.display = s;
-		}
+    <script type="text/javascript">
+    	function swap(id1,id2)
+    	{
+    		var d1 = document.getElementById(id1);
+    		var d2 = document.getElementById(id2);
+    		var s = d1.style.display;
+    		d1.style.display = d2.style.display;
+    		d2.style.display = s;
+    	}
 JS
 
 $template = <<TMPL;
@@ -145,14 +145,14 @@ $template = <<TMPL;
 
 <tmpl_loop reports>
 <div id="#DP<tmpl_var __counter__>" class="report">
-	<h2 id="#DPH<tmpl_var __counter__>"
-	    onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')">
-		<tmpl_var title>
-	</h2>
-	<div id="#DPS<tmpl_var __counter__>" class="report_summary">
-		<tmpl_var summary>
-	</div>
-	<div id="#DPR<tmpl_var __counter__>" class="report_full" style="display:none"><tmpl_var report></div>
+    <h2 id="#DPH<tmpl_var __counter__>"
+        onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')">
+    	<tmpl_var title>
+    </h2>
+    <div id="#DPS<tmpl_var __counter__>" class="report_summary">
+    	<tmpl_var summary>
+    </div>
+    <div id="#DPR<tmpl_var __counter__>" class="report_full" style="display:none"><tmpl_var report></div>
 </div>
 </tmpl_loop>
 
@@ -166,7 +166,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -176,6 +176,7 @@ This module provides a plugin framework for displaying runtime information
 about your CGI::Application app in a popup window. A sample Timing plugin is
 provided to show how it works:
 
+    BEGIN { $ENV{'CAP_DEVPOPUP_EXEC'} = 1; } # turn it on for real
     use CGI::Application::Plugin::DevPopup;
     use CGI::Application::Plugin::DevPopup::Timing;
 
@@ -186,6 +187,33 @@ Now whenever you access a runmode, a window pops up over your content, showing
 information about how long the various stages have taken. Adding other
 CAP::DevPopup plugins will get you more information. A HTML::Tidy plugin
 showing you how your document conforms to W3C standards is in the works. 
+
+The output consists of a Table of Contents, and a bunch of reports. A rough
+translation into plain text could look like this:
+
+    Devpopup report for My::App -> add_timing
+
+    * Timings - Total runtime: 3.1178 sec.
+
+    +-----------------------------------------------------------------------+
+    | Timings                                                               |
+    +-----------------------------------------------------------------------+
+    | Application started at: Thu Sep 22 02:55:35 2005                      |
+    | From                       To                         Time taken      |
+    |-----------------------------------------------------------------------|
+    | init                       prerun                     0.107513 sec.   |
+    | prerun                     before expensive operation 0.000371 sec.   |
+    | before expensive operation after expensive operation  3.006688 sec.   |
+    | after expensive operation  load_tmpl(dp.html)         0.000379 sec.   |
+    | load_tmpl(dp.html)         postrun                    0.002849 sec.   |
+    +-----------------------------------------------------------------------+
+
+The reports expand and collapse by clicking on the ToC entry or the report
+header.
+
+You can see a (developer) version in action here:
+L<http://oss.rhesa.com/scripts/dp.cgi>, and the same script with the plugin
+turned off at L<http://oss.rhesa.com/scripts/dp_off.cgi>.
 
 =head2 Developer information
 
@@ -202,11 +230,19 @@ You pass your output to the devpopup object by calling
                 title   => $title,
                 summary => $summary,
                 report  => $body
-	);
+    );
 
 You are receiving $outputref, because DevPopup wants to be the last one to be
 called in the postrun callback. If you had wanted to act at postrun time, then
 please do so with this variable, and not through a callback at postrun.
+
+=head2 The C<on> switch
+
+Since this is primarily a development plugin, and you wouldn't want it to run
+in your production code, an environment variable named CAP_DEVPOPUP_EXEC has to
+be set to 1 for this module to function. Absense of the environment variable
+turns this module into a no-op: while the plugin and its plugins are still
+loaded, they won't modify your output.
 
 =head1 EXPORTS
 
@@ -254,14 +290,33 @@ needed.
 
 =back
 
+=head1 INSTALLATION
+
+INSTALLATION
+
+To install this module, run:
+	
+    cpan CGI::Application::Plugin::DevPopup
+
+To mnually install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+=head1 SEE ALSO
+
+L<CGI::Application>. L<CGI::Application::Plugin::DevPopup::Timing>
+
 =head1 AUTHOR
 
-Rhesa Rozendaal, C<rhesa@cpan.org>
+Rhesa Rozendaal, L<rhesa@cpan.org>
 
 =head1 BUGS
 
 Please report any bugs or feature requests to
-C<bug-cgi-application-plugin-devpopup@rt.cpan.org>, or through the web
+L<bug-cgi-application-plugin-devpopup@rt.cpan.org>, or through the web
 interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-DevPopup>.
 I will be notified, and then you'll automatically be notified of progress on
@@ -274,6 +329,8 @@ your bug as I make changes.
 =item Mark Stosberg for the initial idea, and for pushing me to write it.
 
 =item Sam Tregar for providing me with the skeleton cgiapp_postrun.
+
+=item Everybody on the cgiapp mailinglist and on #cgiapp for cheering me on :-)
 
 =back
 

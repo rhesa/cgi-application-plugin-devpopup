@@ -1,8 +1,6 @@
 use Test::More tests => 1;
 use Data::Dumper;
 
-BEGIN { $ENV{CAP_DEVPOPUP_EXEC} = 1; }
-
 {
 	package My::App;
 	use base qw/CGI::Application/;
@@ -38,8 +36,8 @@ $ENV{CGI_APP_RETURN_ONLY} = 1;
 my $app    = My::App->new;
 my $output = $app->run;
 
-like($output, qr/Test 1 report body/, 'Report generated');
+unlike($output, qr/Test 1 report body/, 'Report not turned on');
 
 __END__
 1..1
-ok 1 - Report generated
+ok 1 - Report not turned on

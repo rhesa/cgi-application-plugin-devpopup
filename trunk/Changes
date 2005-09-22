@@ -1,5 +1,15 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+0.02	2005-09-22  Rhesa Rozendaal <rhesa@cpan.org>
+	- Added master switch in the form of $ENV{CAP_DEVPOPUP_EXEC}
+		(thanks to markstos and hide on #cgiapp)
+
+	- Added a hook to ::Timing at devpopup_addtiming for your own timing needs
+	- Added name of template in load_tmpl timing point
+		(thanks to Michael Graham on the mailing list)
+
+	- Cosmetic changes in html
+
 0.01    2005-09-21  Rhesa Rozendaal <rhesa@cpan.org>
     - Initial revision, basic html and a simple Timing plugin.
 

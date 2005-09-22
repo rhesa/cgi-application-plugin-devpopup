@@ -7,5 +7,6 @@ lib/CGI/Application/Plugin/DevPopup.pm
 lib/CGI/Application/Plugin/DevPopup/Timing.pm
 t/00-load.t
 t/01-basics.t
+t/02-production.t
 t/pod-coverage.t
 t/pod.t
