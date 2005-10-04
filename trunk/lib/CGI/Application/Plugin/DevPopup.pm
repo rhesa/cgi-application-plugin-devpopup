@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.02';
+our $VERSION = '0.9';
 
 use base 'Exporter';
 use HTML::Template;
@@ -50,10 +50,10 @@ sub _devpopup_output
     return if defined $type and                         # no type defaults to html, so we have work to do.
       $props{$type} !~ /html/i;                         # else skip any other types.
 
-    
+    my $devpopup = $self->devpopup;
+    _http_headers($devpopup);                           # add http headers report    
     $self->call_hook( 'devpopup_report', $outputref );  # process our callback hook
 
-    my $devpopup = $self->devpopup;
     my $tmpl = HTML::Template->new(
                                     scalarref         => \$template,
                                     die_on_bad_params => 0,
@@ -94,6 +94,22 @@ sub _devpopup_output
     }
 }
 
+sub _http_headers
+{
+    my $self = shift;
+    my $r=0;
+    my $report = join $/, map {
+                    $r=1-$r;
+                    qq{<tr class="@{[$r?'odd':'even']}"><td valign="top"> $_ </td><td> $ENV{$_} </td></tr>}
+                }
+                sort keys %ENV;
+    $self->add_report(
+        title => 'HTTP Headers',
+        summary => 'List of environment variables',
+        report => '<style>tr.even{background-color:#eee}</style><table>' . $report . '</table>'
+    );
+}
+
 sub _escape_js
 {
     my $j = shift;
@@ -112,30 +128,32 @@ $head = <<HEAD;
 <head>
     <title>Devpopup results</title>
     <style type="text/css">
-    	div.report { border: dotted 1px black; margin: 1em;}
-    	div.report h2 { color: #000; background-color: #ddd; padding:.2em; margin-top:0;}
-    	div.report_full, div.report_summary { padding: 0em 1em; }
-    	a:hover, div.report h2:hover { cursor: pointer; background-color: #eee; }
-    	a { text-decoration: underline }
+        div.report { border: dotted 1px black; margin: 1em;}
+        div.report h2 { color: #000; background-color: #ddd; padding:.2em; margin-top:0;}
+        div.report_full, div.report_summary { padding: 0em 1em; }
+        a:hover, div.report h2:hover, a.print_button:hover { cursor: pointer; background-color: #eee; }
+        a { text-decoration: underline }
+        a.print_button { text-align: right; float: right; clear: right; padding: .2em; margin-right: 1em; color: #000; background-color:#ddd; border:solid 1px #444; }
     </style>
 HEAD
 
 $script = <<JS;
     <script type="text/javascript">
-    	function swap(id1,id2)
-    	{
-    		var d1 = document.getElementById(id1);
-    		var d2 = document.getElementById(id2);
-    		var s = d1.style.display;
-    		d1.style.display = d2.style.display;
-    		d2.style.display = s;
-    	}
+        function swap(id1,id2)
+        {
+            var d1 = document.getElementById(id1);
+            var d2 = document.getElementById(id2);
+            var s = d1.style.display;
+            d1.style.display = d2.style.display;
+            d2.style.display = s;
+        }
 JS
 
 $template = <<TMPL;
 </head>
 <body>
 <h1>Devpopup report for <tmpl_var app_class> -&gt; <tmpl_var runmode></h1>
+<a href="javascript:window.print()" class="print_button">Print</a>
 <div id="titles">
 <ul>
 <tmpl_loop reports>
@@ -147,10 +165,10 @@ $template = <<TMPL;
 <div id="#DP<tmpl_var __counter__>" class="report">
     <h2 id="#DPH<tmpl_var __counter__>"
         onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')">
-    	<tmpl_var title>
+        <tmpl_var title>
     </h2>
     <div id="#DPS<tmpl_var __counter__>" class="report_summary">
-    	<tmpl_var summary>
+        <tmpl_var summary>
     </div>
     <div id="#DPR<tmpl_var __counter__>" class="report_full" style="display:none"><tmpl_var report></div>
 </div>
@@ -166,7 +184,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.02
+Version 0.9
 
 =head1 SYNOPSIS
 
@@ -295,7 +313,7 @@ needed.
 INSTALLATION
 
 To install this module, run:
-	
+    
     cpan CGI::Application::Plugin::DevPopup
 
 To mnually install this module, run the following commands:

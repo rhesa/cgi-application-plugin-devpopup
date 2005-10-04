@@ -3,7 +3,7 @@ NAME
     window
 
 VERSION
-    Version 0.02
+    Version 0.9
 
 SYNOPSIS
   End user information
@@ -131,8 +131,8 @@ BUGS
     Please report any bugs or feature requests to
     bug-cgi-application-plugin-devpopup@rt.cpan.org, or through the web
     interface at
-    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-D
-    evPopup>. I will be notified, and then you'll automatically be notified
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-
+    DevPopup>. I will be notified, and then you'll automatically be notified
     of progress on your bug as I make changes.
 
 ACKNOWLEDGEMENTS

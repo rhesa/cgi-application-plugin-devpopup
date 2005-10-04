@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+0.9     2005-10-04  Rhesa Rozendaal <rhesa@cpan.org>
+    - Added HTTP Headers report
+
 0.02	2005-09-22  Rhesa Rozendaal <rhesa@cpan.org>
 	- Added master switch in the form of $ENV{CAP_DEVPOPUP_EXEC}
 		(thanks to markstos and hide on #cgiapp)

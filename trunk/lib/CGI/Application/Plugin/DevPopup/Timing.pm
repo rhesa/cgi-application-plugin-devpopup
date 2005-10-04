@@ -1,10 +1,11 @@
 package CGI::Application::Plugin::DevPopup::Timing;
 
+use strict;
 use base qw/Exporter/;
 use Time::HiRes qw/gettimeofday tv_interval/;
 my $start = [gettimeofday];
 
-our $VERSION = '0.02';
+our $VERSION = '0.9';
 
 sub import
 {
