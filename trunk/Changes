@@ -1,7 +1,14 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
-0.9     2005-10-04  Rhesa Rozendaal <rhesa@cpan.org>
+0.93    2005-10-05  Rhesa Rozendaal <rhesa@cpan.org>
+    - Made popup resizable and scrollable in IE.
+
+0.92    2005-10-05  Rhesa Rozendaal <rhesa@cpan.org>
+    - Moved HTTP Headers to its own module
+
+0.91    2005-10-04  Rhesa Rozendaal <rhesa@cpan.org>
     - Added HTTP Headers report
+    - Updated docs to reflect availability of CAP::HtmlTidy
 
 0.02	2005-09-22  Rhesa Rozendaal <rhesa@cpan.org>
 	- Added master switch in the form of $ENV{CAP_DEVPOPUP_EXEC}

@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.9';
+our $VERSION = '0.93';
 
 use base 'Exporter';
 use HTML::Template;
@@ -51,7 +51,6 @@ sub _devpopup_output
       $props{$type} !~ /html/i;                         # else skip any other types.
 
     my $devpopup = $self->devpopup;
-    _http_headers($devpopup);                           # add http headers report    
     $self->call_hook( 'devpopup_report', $outputref );  # process our callback hook
 
     my $tmpl = HTML::Template->new(
@@ -71,8 +70,10 @@ sub _devpopup_output
 
     my $js = qq{
     <script language="javascript">
-    var devpopup_window = window.open("", "devpopup_window", "height=400,width=600");
+    var devpopup_window = window.open("", "devpopup_window", "height=400,width=600,scrollbar,resizable");
     devpopup_window.document.write("$h");
+    devpopup_window.document.write("\t<s");
+    devpopup_window.document.write("cript type=\\"text/javascript\\">");
     devpopup_window.document.write("$j");
     devpopup_window.document.write("\t<");
     devpopup_window.document.write("/script>");
@@ -94,25 +95,10 @@ sub _devpopup_output
     }
 }
 
-sub _http_headers
-{
-    my $self = shift;
-    my $r=0;
-    my $report = join $/, map {
-                    $r=1-$r;
-                    qq{<tr class="@{[$r?'odd':'even']}"><td valign="top"> $_ </td><td> $ENV{$_} </td></tr>}
-                }
-                sort keys %ENV;
-    $self->add_report(
-        title => 'HTTP Headers',
-        summary => 'List of environment variables',
-        report => '<style>tr.even{background-color:#eee}</style><table>' . $report . '</table>'
-    );
-}
-
 sub _escape_js
 {
     my $j = shift;
+    $j =~ s/\r//g;
     $j =~ s/\\/\\\\/g;
     $j =~ s/"/\\"/g;
     $j =~ s/\n/\\n" + \n\t"/g;
@@ -138,7 +124,6 @@ $head = <<HEAD;
 HEAD
 
 $script = <<JS;
-    <script type="text/javascript">
         function swap(id1,id2)
         {
             var d1 = document.getElementById(id1);
@@ -184,7 +169,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.9
+Version 0.93
 
 =head1 SYNOPSIS
 
@@ -204,7 +189,8 @@ provided to show how it works:
 Now whenever you access a runmode, a window pops up over your content, showing
 information about how long the various stages have taken. Adding other
 CAP::DevPopup plugins will get you more information. A HTML::Tidy plugin
-showing you how your document conforms to W3C standards is in the works. 
+showing you how your document conforms to W3C standards is available: seer
+L<CGI::Application::Plugin::HtmlTidy>.
 
 The output consists of a Table of Contents, and a bunch of reports. A rough
 translation into plain text could look like this:
@@ -258,9 +244,32 @@ please do so with this variable, and not through a callback at postrun.
 
 Since this is primarily a development plugin, and you wouldn't want it to run
 in your production code, an environment variable named CAP_DEVPOPUP_EXEC has to
-be set to 1 for this module to function. Absense of the environment variable
-turns this module into a no-op: while the plugin and its plugins are still
-loaded, they won't modify your output.
+be set to 1 for this module to function, and it must be present at compile
+time. This means you should place it in a BEGIN{} block, or use SetEnv or
+PerlSetEnv (remember to set those before any PerlRequire or PerlModule lines).
+
+Absense of the environment variable turns this module into a no-op: while the
+plugin and its plugins are still loaded, they won't modify your output.
+
+=head1 Available Plugins
+
+=over 4
+
+=item o
+
+L<CGI::Application::Plugin::DevPopup::Timing> and
+L<CGI::Application::Plugin::DevPopup::HTTPHeaders> are bundled with this
+distribution.
+
+=item o
+
+L<CGI::Application::Plugin::HtmlTidy> integrates with this module.
+
+=item o
+
+L<CGI::Application::Plugin::TT> integrates with this module.
+
+=back
 
 =head1 EXPORTS
 

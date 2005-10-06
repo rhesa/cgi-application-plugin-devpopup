@@ -5,7 +5,7 @@ use base qw/Exporter/;
 use Time::HiRes qw/gettimeofday tv_interval/;
 my $start = [gettimeofday];
 
-our $VERSION = '0.9';
+our $VERSION = '0.91';
 
 sub import
 {
@@ -33,7 +33,7 @@ sub _timer_report
         report  => '<style>
 			th { text-align:left; border-bottom:solid 1px black; }
 			</style>' .
-			'Application started at: ' . scalar( localtime( $start->[0] ) ) . '<br>' .
+			'Application started at: ' . scalar( gmtime( $start->[0] ) ) . ' GMT<br>' .
 			'<table width="100%"><tr><th>From</th><th>To</th><th>Time taken</th></tr>' .
 			join(
 			  $/,
