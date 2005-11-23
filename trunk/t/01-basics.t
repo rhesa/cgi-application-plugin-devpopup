@@ -41,7 +41,7 @@ my $output = $app->run;
 like($output, qr/Test 1 report body/, 'Report generated');
 
 like($output, qr/resizable/, 'Window is resizable');
-like($output, qr/scrollbar/, 'Window has scrollbars');
+like($output, qr/scrollbars/, 'Window has scrollbars'); # See RT #16012
 
 __END__
 1..1

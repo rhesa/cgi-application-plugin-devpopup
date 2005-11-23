@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.93';
+our $VERSION = '0.94';
 
 use base 'Exporter';
 use HTML::Template;
@@ -70,7 +70,7 @@ sub _devpopup_output
 
     my $js = qq{
     <script language="javascript">
-    var devpopup_window = window.open("", "devpopup_window", "height=400,width=600,scrollbar,resizable");
+    var devpopup_window = window.open("", "devpopup_window", "height=400,width=600,scrollbars,resizable");
     devpopup_window.document.write("$h");
     devpopup_window.document.write("\t<s");
     devpopup_window.document.write("cript type=\\"text/javascript\\">");
@@ -169,7 +169,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.93
+Version 0.94
 
 =head1 SYNOPSIS
 

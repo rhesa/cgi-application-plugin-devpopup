@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+0.94    2005-11-23  Rhesa Rozendaal <rhesa@cpan.org>
+    - scrollbars didn't show up after all (reported by Robert Lawson)
+
 0.93    2005-10-05  Rhesa Rozendaal <rhesa@cpan.org>
     - Made popup resizable and scrollable in IE.
 
