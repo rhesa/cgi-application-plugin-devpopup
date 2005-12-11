@@ -3,7 +3,7 @@ NAME
     window
 
 VERSION
-    Version 0.94
+    Version 0.95
 
 SYNOPSIS
   End user information
@@ -48,8 +48,7 @@ SYNOPSIS
     report header.
 
     You can see a (developer) version in action here:
-    <http://oss.rhesa.com/scripts/dp.cgi>, and the same script with the
-    plugin turned off at <http://oss.rhesa.com/scripts/dp_off.cgi>.
+    <http://oss.rhesa.com/cpan/cap-devpopup/example>.
 
   Developer information
     Creating a new plugin for DevPopup is fairly simple. CAP::DevPopup
@@ -65,7 +64,7 @@ SYNOPSIS
         $cgiapp_class->devpopup->add_report(
                     title   => $title,
                     summary => $summary,
-                    report  => $body
+                    report  => $body,
         );
 
     You are receiving $outputref, because DevPopup wants to be the last one
@@ -86,13 +85,11 @@ SYNOPSIS
     your output.
 
 Available Plugins
-    o   CGI::Application::Plugin::DevPopup::Timing and
-        CGI::Application::Plugin::DevPopup::HTTPHeaders are bundled with
-        this distribution.
-
-    o   CGI::Application::Plugin::HtmlTidy integrates with this module.
-
-    o   CGI::Application::Plugin::TT integrates with this module.
+    o CGI::Application::Plugin::DevPopup::Timing and
+    CGI::Application::Plugin::DevPopup::HTTPHeaders are bundled with this
+    distribution.
+    o CGI::Application::Plugin::HtmlTidy integrates with this module.
+    o CGI::Application::Plugin::TT integrates with this module.
 
 EXPORTS
     * devpopup
@@ -112,6 +109,11 @@ METHODS
 
         * report
                 Your full output
+
+        * severity
+                An optional value specifying the importance of your report.
+                Accepted values are qw/debug info warning error fatal/. This
+                value is used to color-code the report headers.
 
         * script
                 If you have custom javascript, then please pass it in

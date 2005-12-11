@@ -1,5 +1,10 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+0.95    2005-12-07  Rhesa Rozendaal <rhesa@cpan.org>
+    - added "severity" attribute to reports.
+    - cosmetic changes in css and html
+    - added log report (from Log::Dispatch or STDERR)
+    
 0.94    2005-11-23  Rhesa Rozendaal <rhesa@cpan.org>
     - scrollbars didn't show up after all (reported by Robert Lawson)
 

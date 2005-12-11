@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.94';
+our $VERSION = '0.95';
 
 use base 'Exporter';
 use HTML::Template;
@@ -37,7 +37,8 @@ sub add_report
 {
     my $self   = shift;                                 # a devpopup object
     my %params = @_;
-    push @$self, \%params;                              # no validation just yet. Hey, this is 0.01!
+    $params{severity} ||= 'info';
+    push @$self, \%params;
 }
 
 sub _devpopup_output
@@ -120,6 +121,12 @@ $head = <<HEAD;
         a:hover, div.report h2:hover, a.print_button:hover { cursor: pointer; background-color: #eee; }
         a { text-decoration: underline }
         a.print_button { text-align: right; float: right; clear: right; padding: .2em; margin-right: 1em; color: #000; background-color:#ddd; border:solid 1px #444; }
+        // severity colors
+        .sev_debug             { background-color: #ccffcc; color: #000; }
+        .sev_info              { } // default
+        .sev_warning           { background-color: #ffff99; color: #000; }
+        .sev_error             { background-color: #ff9999; color: #000; }
+        .sev_fatal             { background-color: #ff6600; color: #fff; font-weight: bold; }
     </style>
 HEAD
 
@@ -142,13 +149,17 @@ $template = <<TMPL;
 <div id="titles">
 <ul>
 <tmpl_loop reports>
-    <li><a onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')"><tmpl_var title></a> - <tmpl_var summary></li>
+    <li class="_sev_<tmpl_var severity>">
+        <a onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')"><tmpl_var title></a> - <tmpl_var summary>
+    </li>
 </tmpl_loop>
 </ul>
+</div>
 
 <tmpl_loop reports>
 <div id="#DP<tmpl_var __counter__>" class="report">
     <h2 id="#DPH<tmpl_var __counter__>"
+        class="_sev_<tmpl_var severity>"
         onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')">
         <tmpl_var title>
     </h2>
@@ -169,7 +180,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.94
+Version 0.95
 
 =head1 SYNOPSIS
 
@@ -216,8 +227,7 @@ The reports expand and collapse by clicking on the ToC entry or the report
 header.
 
 You can see a (developer) version in action here:
-L<http://oss.rhesa.com/scripts/dp.cgi>, and the same script with the plugin
-turned off at L<http://oss.rhesa.com/scripts/dp_off.cgi>.
+L<http://oss.rhesa.com/cpan/cap-devpopup/example>.
 
 =head2 Developer information
 
@@ -233,7 +243,7 @@ You pass your output to the devpopup object by calling
     $cgiapp_class->devpopup->add_report(
                 title   => $title,
                 summary => $summary,
-                report  => $body
+                report  => $body,
     );
 
 You are receiving $outputref, because DevPopup wants to be the last one to be
@@ -255,19 +265,13 @@ plugin and its plugins are still loaded, they won't modify your output.
 
 =over 4
 
-=item o
-
-L<CGI::Application::Plugin::DevPopup::Timing> and
+=item o L<CGI::Application::Plugin::DevPopup::Timing> and
 L<CGI::Application::Plugin::DevPopup::HTTPHeaders> are bundled with this
 distribution.
 
-=item o
+=item o L<CGI::Application::Plugin::HtmlTidy> integrates with this module.
 
-L<CGI::Application::Plugin::HtmlTidy> integrates with this module.
-
-=item o
-
-L<CGI::Application::Plugin::TT> integrates with this module.
+=item o L<CGI::Application::Plugin::TT> integrates with this module.
 
 =back
 
@@ -305,6 +309,12 @@ An optional one- or two-line summary of your findings
 =item * report
 
 Your full output
+
+=item * severity
+
+An optional value specifying the importance of your report. Accepted values
+are qw/debug info warning error fatal/. This value is used to color-code the
+report headers.
 
 =item * script
 
