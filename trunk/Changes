@@ -1,5 +1,9 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+0.951   2006-11-20  Rhesa Rozendaal <rhesa@cpan.org>
+    - pod fixes
+    - dist improvements conforming to CPANTS
+
 0.95    2005-12-07  Rhesa Rozendaal <rhesa@cpan.org>
     - added "severity" attribute to reports.
     - cosmetic changes in css and html

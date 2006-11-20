@@ -78,6 +78,10 @@ sub _cgi_report
     return $report;
 }
 
+1;    # End of CGI::Application::Plugin::DevPopup::HTTPHeaders
+
+__END__
+
 =head1 NAME
 
 CGI::Application::Plugin::DevPopup::HTTPHeaders - show incoming and outgoing HTTP headers
@@ -85,7 +89,7 @@ CGI::Application::Plugin::DevPopup::HTTPHeaders - show incoming and outgoing HTT
 =head1 SYNOPSIS
 
     use CGI::Application::Plugin::DevPopup;
-    use CGI::Application::Plugin::DevPopup::;HTTPHeaders
+    use CGI::Application::Plugin::DevPopup::HTTPHeaders;
 
     The rest of your application follows
     ...
@@ -119,6 +123,4 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-
-1;    # End of CGI::Application::Plugin::DevPopup::HTTPHeaders
 

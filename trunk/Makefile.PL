@@ -7,6 +7,7 @@ WriteMakefile(
     AUTHOR              => 'Rhesa Rozendaal <rhesa@cpan.org>',
     VERSION_FROM        => 'lib/CGI/Application/Plugin/DevPopup.pm',
     ABSTRACT_FROM       => 'lib/CGI/Application/Plugin/DevPopup.pm',
+    LICENSE             => 'perl',
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,

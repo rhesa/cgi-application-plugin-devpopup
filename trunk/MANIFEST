@@ -1,6 +1,5 @@
 Changes
 MANIFEST
-META.yml # Will be created by "make dist"
 Makefile.PL
 README
 lib/CGI/Application/Plugin/DevPopup.pm
@@ -11,3 +10,4 @@ t/01-basics.t
 t/02-production.t
 t/pod-coverage.t
 t/pod.t
+META.yml                                 Module meta-data (added by MakeMaker)

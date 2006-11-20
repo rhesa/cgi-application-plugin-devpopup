@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.95';
+our $VERSION = '0.951';
 
 use base 'Exporter';
 use HTML::Template;
