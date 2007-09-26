@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '0.951';
+our $VERSION = '1.00';
 
 use base 'Exporter';
 use HTML::Template;
@@ -180,7 +180,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 0.95
+Version 1.00
 
 =head1 SYNOPSIS
 
@@ -265,7 +265,8 @@ plugin and its plugins are still loaded, they won't modify your output.
 
 =over 4
 
-=item o L<CGI::Application::Plugin::DevPopup::Timing> and
+=item o L<CGI::Application::Plugin::DevPopup::Timing>,
+L<CGI::Application::Plugin::DevPopup::Log> and
 L<CGI::Application::Plugin::DevPopup::HTTPHeaders> are bundled with this
 distribution.
 

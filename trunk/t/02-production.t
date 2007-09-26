@@ -1,6 +1,9 @@
 use Test::More tests => 1;
 use Data::Dumper;
 
+# make sure the outer environment doesn't set our flag
+delete $ENV{'CAP_DEVPOPUP_EXEC'};
+
 {
 	package My::App;
 	use base qw/CGI::Application/;
