@@ -3,7 +3,7 @@ NAME
     window
 
 VERSION
-    Version 0.951
+    Version 1.00
 
 SYNOPSIS
   End user information
@@ -22,7 +22,7 @@ SYNOPSIS
     showing information about how long the various stages have taken. Adding
     other CAP::DevPopup plugins will get you more information. A HTML::Tidy
     plugin showing you how your document conforms to W3C standards is
-    available: seer CGI::Application::Plugin::HtmlTidy.
+    available: see CGI::Application::Plugin::HtmlTidy.
 
     The output consists of a Table of Contents, and a bunch of reports. A
     rough translation into plain text could look like this:
@@ -85,7 +85,8 @@ SYNOPSIS
     your output.
 
 Available Plugins
-    o CGI::Application::Plugin::DevPopup::Timing and
+    o CGI::Application::Plugin::DevPopup::Timing,
+    CGI::Application::Plugin::DevPopup::Log and
     CGI::Application::Plugin::DevPopup::HTTPHeaders are bundled with this
     distribution.
     o CGI::Application::Plugin::HtmlTidy integrates with this module.
@@ -153,11 +154,12 @@ BUGS
 ACKNOWLEDGEMENTS
     Mark Stosberg for the initial idea, and for pushing me to write it.
     Sam Tregar for providing me with the skeleton cgiapp_postrun.
+    Joshua Miller for providing the ::Log plugin.
     Everybody on the cgiapp mailinglist and on #cgiapp for cheering me on
     :-)
 
 COPYRIGHT & LICENSE
-    Copyright 2005 Rhesa Rozendaal, all rights reserved.
+    Copyright 2005-2007 Rhesa Rozendaal, all rights reserved.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+1.00    2007-09-27  Rhesa Rozendaal <rhesa@cpan.org>
+    - added ::Log plugin, kindly provided by Joshua Miller
+
 0.951   2006-11-20  Rhesa Rozendaal <rhesa@cpan.org>
     - pod fixes
     - dist improvements conforming to CPANTS

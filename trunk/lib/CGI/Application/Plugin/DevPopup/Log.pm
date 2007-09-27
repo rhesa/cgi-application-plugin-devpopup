@@ -114,9 +114,9 @@ Joshua I Miller, L<unrtst@cpan.org>
 =head1 BUGS
 
 Please report any bugs or feature requests to
-L<bug-cgi-application-plugin-devpopup-log@rt.cpan.org>, or through the web
+L<bug-cgi-application-plugin-devpopup@rt.cpan.org>, or through the web
 interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-DevPopup-Log>.
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Plugin-DevPopup>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 

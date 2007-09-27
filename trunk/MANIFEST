@@ -9,6 +9,5 @@ lib/CGI/Application/Plugin/DevPopup/HTTPHeaders.pm
 t/00-load.t
 t/01-basics.t
 t/02-production.t
-t/pod-coverage.t
 t/pod.t
 META.yml                                 Module meta-data (added by MakeMaker)

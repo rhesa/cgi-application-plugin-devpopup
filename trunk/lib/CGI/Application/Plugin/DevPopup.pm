@@ -174,6 +174,10 @@ $template = <<TMPL;
 </html>
 TMPL
 
+1;    # End of CGI::Application::Plugin::DevPopup
+
+__END__
+
 =head1 NAME
 
 CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
@@ -200,7 +204,7 @@ provided to show how it works:
 Now whenever you access a runmode, a window pops up over your content, showing
 information about how long the various stages have taken. Adding other
 CAP::DevPopup plugins will get you more information. A HTML::Tidy plugin
-showing you how your document conforms to W3C standards is available: seer
+showing you how your document conforms to W3C standards is available: see
 L<CGI::Application::Plugin::HtmlTidy>.
 
 The output consists of a Table of Contents, and a bunch of reports. A rough
@@ -368,17 +372,18 @@ your bug as I make changes.
 
 =item Sam Tregar for providing me with the skeleton cgiapp_postrun.
 
+=item Joshua Miller for providing the ::Log plugin.
+
 =item Everybody on the cgiapp mailinglist and on #cgiapp for cheering me on :-)
 
 =back
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2005 Rhesa Rozendaal, all rights reserved.
+Copyright 2005-2007 Rhesa Rozendaal, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
 
-1;    # End of CGI::Application::Plugin::DevPopup
