@@ -101,6 +101,16 @@ CGI::Application::Plugin::DevPopup::Log will create a "Log" section in the DevPo
 
 L<CGI::Application::Plugin::LogDispatch> is very handy for this, but you can write to that filehandle anyway you'd like.
 
+=head1 METHODS
+
+=over
+
+=item devpopup_log_handle
+
+Generates a (fake) filehandle you can pass on to a logging plugin. See the Synopsis for usage.
+
+=back
+
 =head1 SEE ALSO
 
     L<CGI::Application::Plugin::DevPopup>
