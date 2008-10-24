@@ -1,13 +1,15 @@
+.cvsignore
 Changes
-MANIFEST
-Makefile.PL
-README
 lib/CGI/Application/Plugin/DevPopup.pm
-lib/CGI/Application/Plugin/DevPopup/Timing.pm
-lib/CGI/Application/Plugin/DevPopup/Log.pm
 lib/CGI/Application/Plugin/DevPopup/HTTPHeaders.pm
+lib/CGI/Application/Plugin/DevPopup/Log.pm
+lib/CGI/Application/Plugin/DevPopup/Timing.pm
+Makefile.PL
+MANIFEST
+META.yml			Module meta-data (added by MakeMaker)
+README
 t/00-load.t
 t/01-basics.t
 t/02-production.t
+t/pod-coverage.t
 t/pod.t
-META.yml                                 Module meta-data (added by MakeMaker)

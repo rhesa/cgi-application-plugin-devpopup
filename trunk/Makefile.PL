@@ -13,6 +13,8 @@ WriteMakefile(
         'Test::More' => 0,
 		'CGI::Application'	=> 4.01,
 		'Time::HiRes' => 0,
+        'HTML::Template' => 0,
+        'IO::Scalar' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'CGI-Application-Plugin-DevPopup-*' },

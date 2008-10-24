@@ -3,7 +3,7 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 use base 'Exporter';
 use HTML::Template;
@@ -149,7 +149,7 @@ $template = <<TMPL;
 <div id="titles">
 <ul>
 <tmpl_loop reports>
-    <li class="_sev_<tmpl_var severity>">
+    <li class="sev_<tmpl_var severity>">
         <a onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')"><tmpl_var title></a> - <tmpl_var summary>
     </li>
 </tmpl_loop>
@@ -159,7 +159,7 @@ $template = <<TMPL;
 <tmpl_loop reports>
 <div id="#DP<tmpl_var __counter__>" class="report">
     <h2 id="#DPH<tmpl_var __counter__>"
-        class="_sev_<tmpl_var severity>"
+        class="sev_<tmpl_var severity>"
         onclick="swap('#DPS<tmpl_var __counter__>','#DPR<tmpl_var __counter__>')">
         <tmpl_var title>
     </h2>
@@ -184,7 +184,7 @@ CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =head1 SYNOPSIS
 
