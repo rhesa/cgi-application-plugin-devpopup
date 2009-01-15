@@ -5,8 +5,6 @@ use IO::Scalar;
 use base qw/Exporter/;
 use vars qw($VERSION @EXPORT);
 
-our $VERSION = '0.01';
-
 @EXPORT = qw(devpopup_log_handle);
 
 sub import

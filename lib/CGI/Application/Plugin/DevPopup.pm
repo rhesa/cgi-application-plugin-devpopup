@@ -3,8 +3,6 @@ package CGI::Application::Plugin::DevPopup;
 use warnings;
 use strict;
 
-our $VERSION = '1.01';
-
 use base 'Exporter';
 use HTML::Template;
 use CGI::Application 4.01;
@@ -181,10 +179,6 @@ __END__
 =head1 NAME
 
 CGI::Application::Plugin::DevPopup - Runtime cgiapp info in a popup window
-
-=head1 VERSION
-
-Version 1.01
 
 =head1 SYNOPSIS
 

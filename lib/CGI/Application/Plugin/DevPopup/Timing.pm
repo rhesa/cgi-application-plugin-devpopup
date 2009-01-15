@@ -5,8 +5,6 @@ use base qw/Exporter/;
 use Time::HiRes qw/gettimeofday tv_interval/;
 my $start = [gettimeofday];
 
-our $VERSION = '0.91';
-
 sub import
 {
     my $c = scalar caller;
@@ -68,6 +66,10 @@ sub _new_or_self
     return $self;
 }
 
+1;    # End of CGI::Application::Plugin::DevPopup::Timing
+
+__END__
+
 =head1 NAME
 
 CGI::Application::Plugin::DevPopup::Timing - show timing information about cgiapp stages
@@ -127,6 +129,4 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-
-1;    # End of CGI::Application::Plugin::DevPopup::Timing
 

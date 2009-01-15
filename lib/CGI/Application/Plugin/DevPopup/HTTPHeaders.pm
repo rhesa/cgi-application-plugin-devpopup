@@ -3,8 +3,6 @@ package CGI::Application::Plugin::DevPopup::HTTPHeaders;
 use strict;
 use base qw/Exporter/;
 
-our $VERSION = '0.11';
-
 sub import
 {
     my $c = scalar caller;
