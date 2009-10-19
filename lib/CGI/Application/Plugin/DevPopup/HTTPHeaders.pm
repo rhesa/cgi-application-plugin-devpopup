@@ -2,7 +2,7 @@ package CGI::Application::Plugin::DevPopup::HTTPHeaders;
 
 use strict;
 use warnings;
-no warnings 'uninitialized';
+no warnings 'uninitialized'; # don't care about empty strings
 use base qw/Exporter/;
 
 sub import
