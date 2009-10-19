@@ -101,6 +101,7 @@ sub _escape_js
     $j =~ s/\\/\\\\/g;
     $j =~ s/"/\\"/g;
     $j =~ s/\n/\\n" + \n\t"/g;
+    $j =~ s/script>/s" + "cript>/g;
     $j;
 }
 
