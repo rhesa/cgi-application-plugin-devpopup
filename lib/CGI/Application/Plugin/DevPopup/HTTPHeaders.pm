@@ -1,6 +1,8 @@
 package CGI::Application::Plugin::DevPopup::HTTPHeaders;
 
 use strict;
+use warnings;
+no warnings 'uninitialized';
 use base qw/Exporter/;
 
 sub import
