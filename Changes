@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+1.04    2009-12-25  Rhesa Rozendaal <rhesa@cpan.org>
+    - RT #53100 (Serguei Trouchelle)
+
 1.03    2009-10-20  Rhesa Rozendaal <rhesa@cpan.org>
     - RT #50096 (Serguei Trouchelle)
     - RT #42315 (Lyle Hopkins)

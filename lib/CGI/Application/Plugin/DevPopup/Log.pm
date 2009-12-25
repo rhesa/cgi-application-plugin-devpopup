@@ -53,7 +53,7 @@ sub devpopup_log_handle
 
     unless (ref $this->{__DEVPOPUP_LOGFH})
     {
-        my $data;
+        my $data = '';
         $this->{__DEVPOPUP_LOGDATA} = \$data;
         my $fh = new IO::Scalar \$data;
         $this->{__DEVPOPUP_LOGFH} = $fh;
