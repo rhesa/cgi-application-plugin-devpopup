@@ -31,7 +31,7 @@ sub _timer_report
         report  => '<style>
 			th { text-align:left; border-bottom:solid 1px black; }
 			</style>' .
-			'Application started at: ' . scalar( gmtime( $start->[0] ) ) . ' GMT<br>' .
+			'Application started at: ' . scalar( gmtime( $start->[0] ) ) . ' GMT<br/>' .
 			'<table width="100%"><tr><th>From</th><th>To</th><th>Time taken</th></tr>' .
 			join(
 			  $/,
