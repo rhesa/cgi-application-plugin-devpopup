@@ -72,8 +72,11 @@ sub _devpopup_output
     var devpopup_window = window.open("", "devpopup_window", "height=400,width=600,scrollbars,resizable");
     devpopup_window.document.write("$h");
     devpopup_window.document.write("\t<s");
-    devpopup_window.document.write("cript type=\\"text/javascript\\">");
+    devpopup_window.document.write("cript type=\\"text/javascript\\">\\n");
+    devpopup_window.document.write("//"+"<"+"![CDATA[\\n");
+    
     devpopup_window.document.write("$j");
+    devpopup_window.document.write("//]"+"]>\\n");
     devpopup_window.document.write("\t<");
     devpopup_window.document.write("/script>");
     devpopup_window.document.write("$o");
