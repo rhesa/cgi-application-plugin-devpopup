@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+1.06    2010-01-10  Rhesa Rozendaal <rhesa@cpan.org>
+    - Better XHTML (Alexandr Ciornii)
+
 1.05    2010-01-07  Rhesa Rozendaal <rhesa@cpan.org>
     - Added repository to META.yml. No code changes.
 

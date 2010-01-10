@@ -47,8 +47,3 @@ like($output, qr/scrollbars/, 'Window has scrollbars'); # See RT #16012
 like($output, qr{\QHTTP_HOST </td><td>  </td>}, 'see http headers, no warning');
 
 __END__
-1..4
-ok 1 - Report generated
-ok 2 - Window is resizable
-ok 3 - Window has scrollbars
-ok 4 - see http headers, no warning
