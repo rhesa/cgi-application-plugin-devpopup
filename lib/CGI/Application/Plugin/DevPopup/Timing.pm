@@ -29,18 +29,18 @@ sub _timer_report
         title   => 'Timings',
         summary => 'Total runtime: ' . tv_interval( $self->[1]{tod}, $self->[-1]{tod} ) . ' sec.',
         report  => '<style>
-			th { text-align:left; border-bottom:solid 1px black; }
-			</style>' .
-			'Application started at: ' . scalar( gmtime( $start->[0] ) ) . ' GMT<br/>' .
-			'<table width="100%"><tr><th>From</th><th>To</th><th>Time taken</th></tr>' .
-			join(
-			  $/,
-			  map {
+            th { text-align:left; border-bottom:solid 1px black; }
+            </style>' .
+            'Application started at: ' . scalar( gmtime( $start->[0] ) ) . ' GMT<br/>' .
+            '<table width="100%"><tr><th>From</th><th>To</th><th>Time taken</th></tr>' .
+            join(
+              $/,
+              map {
                 my $time = tv_interval( $self->[$_]{tod}, $self->[ $_ + 1 ]{tod} );
                 "<tr><td>$self->[$_]{desc}</td><td>$self->[ $_ + 1 ]{desc}</td><td>$time sec.</td></tr>"
               } ( 1 .. $#$self - 1 )
-			)
-			. '</table>'
+            )
+            . '</table>'
     );
 }
 
@@ -58,11 +58,11 @@ sub _new_or_self
 {
     my $app  = shift;
     my $self = $app->param('__CAP_DEVPOPUP_TIMER');
-	unless ($self)
-	{
-		$self = bless [], __PACKAGE__;
-	    $app->param( '__CAP_DEVPOPUP_TIMER' => $self );
-	}
+    unless ($self)
+    {
+        $self = bless [], __PACKAGE__;
+        $app->param( '__CAP_DEVPOPUP_TIMER' => $self );
+    }
     return $self;
 }
 
@@ -85,16 +85,16 @@ CGI::Application::Plugin::DevPopup::Timing - show timing information about cgiap
 Output will look roughly like this:
 
     Timings
-	Total runtime: 3.1178 sec.
-	Application started at: Thu Sep 22 02:55:35 2005
+    Total runtime: 3.1178 sec.
+    Application started at: Thu Sep 22 02:55:35 2005
 
-	From                        To                              Time taken
-	-------------------------------------------------------------------------
-	init                        prerun                          0.107513 sec.
-	prerun                      before expensive operation      0.000371 sec.
-	before expensive operation  after expensive operation       3.006688 sec.
-	after expensive operation   load_tmpl(dp.html)              0.000379 sec.
-	load_tmpl(dp.html)          postrun                         0.002849 sec.
+    From                        To                              Time taken
+    -------------------------------------------------------------------------
+    init                        prerun                          0.107513 sec.
+    prerun                      before expensive operation      0.000371 sec.
+    before expensive operation  after expensive operation       3.006688 sec.
+    after expensive operation   load_tmpl(dp.html)              0.000379 sec.
+    load_tmpl(dp.html)          postrun                         0.002849 sec.
 
 =head1 ADD_TIMING
 
