@@ -94,6 +94,28 @@ CGI::Application::Plugin::DevPopup::HTTPHeaders - show incoming and outgoing HTT
     The rest of your application follows
     ...
 
+Output looks roughly like this:
+
+    Incoming HTTP Headers
+    -----------------------------------
+    http
+    -----------------------------------
+    HTTP_ACCEPT         text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    HTTP_ACCEPT_CHARSET UTF-8,*;q=0.5
+    HTTP_HOST           www.example.com
+    
+    Outgoing HTTP Headers
+    -----------------------------------
+    Content-Type: text/html; charset=utf8
+    
+    Environment Dump
+    -----------------------------------
+    CAP_DEVPOPUP_EXEC   1
+    DOCUMENT_ROOT       /var/www/html
+    GATEWAY_INTERFACE   CGI/1.1
+    QUERY_STRING
+    REMOTE_ADDR         127.0.0.1
+
 =head1 LIMITATIONS
 
 For obvious reasons, the outgoing headers only display what CGI::Application will generate.
