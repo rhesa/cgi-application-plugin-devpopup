@@ -228,9 +228,6 @@ translation into plain text could look like this:
 The reports expand and collapse by clicking on the ToC entry or the report
 header.
 
-You can see a (developer) version in action here:
-L<http://oss.rhesa.com/cpan/cap-devpopup/example>.
-
 =head2 Developer information
 
 Creating a new plugin for DevPopup is fairly simple. CAP::DevPopup registers a
