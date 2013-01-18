@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-DevPopup
 
+1.08    2013-01-18  Rhesa Rozendaal <rhesa@cpan.org>
+    - typo fix (RT69672)
+
 1.07    2011-07-17  Rhesa Rozendaal <rhesa@cpan.org>
     - Document HTTPHeaders output
 
