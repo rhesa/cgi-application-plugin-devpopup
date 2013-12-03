@@ -335,7 +335,7 @@ To install this module, run:
     
     cpan CGI::Application::Plugin::DevPopup
 
-To mnually install this module, run the following commands:
+To manually install this module, run the following commands:
 
     perl Makefile.PL
     make
